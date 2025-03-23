@@ -17,8 +17,7 @@ on:
 
 jobs:
   CI_debug:
-    runs-on: 
-      - song-Standard-PC-i440FX-PIIX-1996
+    runs-on: self-hosted
     steps:
       - name : Template
         run: |
