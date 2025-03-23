@@ -18,7 +18,7 @@ on:
 jobs:
   CI_debug:
     runs-on: 
-      - ARM64
+      - song-Standard-PC-i440FX-PIIX-1996
     steps:
       - name : Template
         run: |
