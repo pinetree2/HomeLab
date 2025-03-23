@@ -1,19 +1,32 @@
 name: Debug Workflow
 
 on:
+  workflow_dispatch: {
+    inputs: {
+      branch: {
+        description: 'Branch name',
+        required: true,
+        default: 'main'
+      }
+    }
+  }
   push:
     branches:
       - 'week/#3'
+      - 'main'
 
-# jobs:
-#   debug:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v3
-
-#       - name: Print debug information
-#         run: |
-#           echo "Branch: ${{ github.ref }}"
-#           echo "Repository: ${{ github.repository }}"
-#           echo "Commit: ${{ github.sha }}"
+jobs:
+  CI_debug:
+    runs-on: 
+      - ARM64
+    steps:
+      - name : Template
+        run: |
+          echo "Hello, World!"
+          echo " This is a device running on ${{ runner.os }}"
+          echo " This is a device running on ${{ runner.arch }}"
+          echo "This is device's architecture is ${{ dpkg --print-architecture}} "
+      
+      - name: Checkout
+        uses: actions/checkout@v2
+        
