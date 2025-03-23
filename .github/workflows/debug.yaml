@@ -39,10 +39,10 @@ jobs:
         continue-on-error: true
       
       - name : Install Docker (if failed)
-        if: failure()
+        #if: failure()
         run: |
           curl -fsSL https://get.docker.com | sh
-          
+        
         #ignore_exit_code: true
       - name: Checkout
         uses: actions/checkout@v2
