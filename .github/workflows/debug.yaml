@@ -43,7 +43,7 @@ jobs:
         run: |
           curl -fsSL https://get.docker.com | sh
           
-        ignore_exit_code: true
+        #ignore_exit_code: true
       - name: Checkout
         uses: actions/checkout@v2
         
