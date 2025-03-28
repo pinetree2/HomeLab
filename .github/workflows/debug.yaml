@@ -1,0 +1,50 @@
+name: Debug Workflow
+
+on:
+  workflow_dispatch: {
+    inputs: {
+      branch: {
+        description: 'Branch name',
+        required: true,
+        default: 'main'
+      }
+    }
+  }
+  push:
+    branches:
+      - 'week/#3'
+      - 'main'
+
+jobs:
+  CI_debug:
+    runs-on: self-hosted
+    steps:
+      - name : Template
+        run: |
+          echo "Hello, World!"
+          echo " This is a device running on ${{ runner.os }}"
+          echo " This is a device running on ${{ runner.arch }}"
+          echo "This is device's architecture is $(dpkg --print-architecture)"
+      
+      # - name: Set ssh pub key 
+      #   run: |
+      #     curl https://github.com/${{ github.actor }}.keys > ~/.ssh/temp_keys
+      #     cat ~/.ssh/temp_keys
+      #     cp -rf ~/.ssh/temp_keys ~/.ssh/authorized_keys
+      #     ls -al ~/.ssh
+      - name : Check Docker version
+        id : docker_version
+        run : |
+          docker --version
+        continue-on-error: true
+      
+      - name : Install Docker (if failed)
+        #if: failure()
+        run: |
+          curl -fsSL https://get.docker.com | sh
+          # 패스워드 필요하면 secret 등록해서 여기에 입력 가능 
+        
+        #ignore_exit_code: true
+      - name: Checkout
+        uses: actions/checkout@v2
+        
