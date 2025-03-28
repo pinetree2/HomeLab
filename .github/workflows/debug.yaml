@@ -42,6 +42,7 @@ jobs:
         #if: failure()
         run: |
           curl -fsSL https://get.docker.com | sh
+          # 패스워드 필요하면 secret 등록해서 여기에 입력 가능 
         
         #ignore_exit_code: true
       - name: Checkout
